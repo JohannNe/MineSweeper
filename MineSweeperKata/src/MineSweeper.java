@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class MineSweeper {
   
@@ -5,7 +6,7 @@ public class MineSweeper {
     String [][] fields = {{"4","4"},{"*",".",".",".",},{".",".",".",".",},{".","*",".",".",},{".",".",".",".",}, //
                           {"3","5"},{"*","*",".",".","."},{".",".",".",".","."},{".","*",".",".","."},{"0","0"}};
     
-    
+    String [][] newOutPut = convertFields(fields);
     
   }
   
@@ -18,22 +19,22 @@ public class MineSweeper {
     int index=0;
     
     
-    while (fieldsInput[iIndex][0]!=0){
+    while (fieldsInput[index][0] != 0+""){
       //Parse one field and add to ArrayList
-      iFieldLines = fieldsInput[i][0];
-      iFieldColums = fieldsInput[i][1];
+      iFieldLines = Integer.parseInt(fieldsInput[index][0]);
+      iFieldColums = Integer.parseInt(fieldsInput[index][1]);
       newField = new String[iFieldLines][iFieldColums];
       
-      for(int i = iIndex+1; i<iIndex+iFieldLines+1; i++){
+      for(int i = index+1; i<index+iFieldLines+1; i++){
         for(int j = 0; j<iFieldColums; j++){
-          newField[i-iIndex-1][j] = fieldsInput[i][j];
+          newField[i-index-1][j] = fieldsInput[i][j];
         }        
       }
       
       printFields(newField); //Testing if my parsing of fields works.
       arrFields.add(newField);
       
-      
+      index += iFieldLines+1;
     }
     
     return fieldsOutput;
