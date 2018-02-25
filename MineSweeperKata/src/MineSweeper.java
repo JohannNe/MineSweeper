@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MineSweeper {
   
@@ -19,18 +20,20 @@ public class MineSweeper {
     
     String[][] strFieldTmp = null;
     //get in the numbers for mines
-    int fieldNumber=1;
+    int fieldNumber=0;
     int index = 0;
     
-    for(Iterator it = arrFields.iterator; it.hasNext();){
-      strFieldTmp = it.next();
-      fieldsOutput[index][0] = "Field #" + fieldNumber;
+    for(Iterator it = arrFields.iterator(); it.hasNext();){
+      fieldNumber++;
+      strFieldTmp = (String[][]) it.next();
+      fieldsOutput[index][0] = "Field #" + fieldNumber + ":";
       
       for(int i = 0; i<strFieldTmp.length; i++){
         index+=1;
-        for(int j = 0; j<strFieldTmp[0]; j++){
+        
+        for(int j = 0; j<strFieldTmp[0].length; j++){
           
-          if(strField[i][j] == "*"){
+          if(strFieldTmp[i][j] == "*"){
             fieldsOutput[index][j] = "*";
           }
           else{
@@ -38,11 +41,13 @@ public class MineSweeper {
           }
         }
         
-        //Adding empty row after each field
-        index ++;
-        fieldsOutput[index][0]="\n";
+        
       }
-      
+      //Adding empty row after each field
+      index ++;
+      if(index<fieldsOutput.length){
+      	fieldsOutput[index][0]="\n";
+      }
     }
     
     return fieldsOutput;
@@ -87,7 +92,6 @@ public class MineSweeper {
         }        
       }
       
-      printFields(newField); //Testing if my parsing of fields works.
       arrFields.add(newField);
      
       index += iFieldLines+1;
@@ -102,9 +106,12 @@ public class MineSweeper {
     
     for(int i = 0; i<fields.length; i++){
       for(int j=0; j<fields[i].length; j++){
-        System.out.print(fields[i][j]);
+        if(fields[i][j]!=null){
+    	  System.out.print(fields[i][j]);
+        }
       }
       System.out.println();
     }
+    System.out.println();
   }
 }
