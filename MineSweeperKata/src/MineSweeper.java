@@ -6,8 +6,11 @@ public class MineSweeper {
   public static void main(String[]args){
     String [][] fields = {{"4","4"},{"*",".",".",".",},{".",".",".",".",},{".","*",".",".",},{".",".",".",".",}, //
                           {"3","5"},{"*","*",".",".","."},{".",".",".",".","."},{".","*",".",".","."},{"0","0"}};
+    System.out.println("Input fields");
     printFields(fields);
     String [][] newOutPut = convertFields(fields);
+    
+    System.out.println("Output fields");
     printFields(newOutPut);
   }
   
@@ -15,7 +18,7 @@ public class MineSweeper {
   public static String[][] convertFields(String[][] fieldsInput){
     String[][] fieldsOutput = null;
     ArrayList<String[][]> arrFields = parseInputToArrayList(fieldsInput);
-    fieldsOutput = new String[fieldsInput.length+arrFields.size()][100];
+    fieldsOutput = new String[fieldsInput.length][100];
     
     
     String[][] strFieldTmp = null;
@@ -29,7 +32,7 @@ public class MineSweeper {
       fieldsOutput[index][0] = "Field #" + fieldNumber + ":";
       
       for(int i = 0; i<strFieldTmp.length; i++){
-        index+=1;
+        index++;
         
         for(int j = 0; j<strFieldTmp[0].length; j++){
           
@@ -44,7 +47,7 @@ public class MineSweeper {
         
       }
       //Adding empty row after each field
-      index ++;
+      index +=2;
       if(index<fieldsOutput.length){
       	fieldsOutput[index][0]="\n";
       }
